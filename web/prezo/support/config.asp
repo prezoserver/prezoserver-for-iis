@@ -1,0 +1,4 @@
+<%
+	Dim DOCROOT
+	DOCROOT = "/"
+%>

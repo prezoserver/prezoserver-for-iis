@@ -1,7 +1,7 @@
 <%
 ' The MIT License (MIT)
 '
-' Copyright (c) 2014 Innerglobe Technology Group, LLC
+' Copyright 2014 Kevin Johnston (kevin@prezoserver.org)
 '
 ' Permission is hereby granted, free of charge, to any person obtaining a copy
 ' of this software and associated documentation files (the "Software"), to deal
@@ -22,4 +22,29 @@
 ' THE SOFTWARE.
 %>
 
-<base href="http://<%Response.Write(Request.ServerVariables("server_name"))%>:<%Response.Write(Request.ServerVariables("server_port"))%>/" />
+<!--
+<%
+Response.Write(Request.ServerVariables("ALL_HTTP"))
+%>
+-->
+
+<%
+' Build the URL for base href
+Dim url
+
+' Determine the protocol based on request header
+If Request.ServerVariables("HTTPS") = "ON" Then
+	url = "https://"
+Else
+	url = "http://"
+End If
+
+' Check if Apache Proxy request header is present. If so use proxy URL instead of local server and port.
+If Request.ServerVariables("HTTP_X_FORWARDED_HOST") <> "" Then
+	url = url & Request.ServerVariables("HTTP_X_FORWARDED_HOST") & "/" & DOCROOT
+Else
+	url = url & Request.ServerVariables("server_name") & ":" & Request.ServerVariables("server_port") & "/"
+End If
+%>
+
+<base href="<%Response.Write(url)%>" />

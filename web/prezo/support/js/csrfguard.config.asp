@@ -31,10 +31,7 @@
  <%
  	dim DOMAIN_STRICT
  	DOMAIN_STRICT = "false"
- 	
- 	dim CONTEXT_PATH
- 	CONTEXT_PATH = "/"
- 	
+ 		
  	dim TOKENS_PER_PAGE
  	TOKENS_PER_PAGE = "false"
  	
