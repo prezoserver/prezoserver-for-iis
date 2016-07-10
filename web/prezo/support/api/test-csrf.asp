@@ -4,8 +4,10 @@
  	 {"message" : "PrezoServer"}
 <%
 	Else
-		Response.Status = "417 Potential CSRF Attack Detected"
-		Response.Write(response.Status)
+		Dim message
+		message = "Potential CSRF Attack Detected"
+		Response.Status = "417" & " " & message
+		Response.Write(message)
 		Response.End
 	End If
 %>
